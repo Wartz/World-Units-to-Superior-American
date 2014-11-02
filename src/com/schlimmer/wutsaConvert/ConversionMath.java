@@ -7,22 +7,35 @@ public class ConversionMath {
     double unitValue;
     String unitMeasurementType;
     String unitConvertToType;
-    private double inchesToCm = 2.54;
-    private double cmToInches = 0.3937;
-    private String mile = "mi";
-    private String kilometer = "km";
-    private int miValue = 5280;
-    private int ftValue = 12;
-    private int inValue = 1;
-    private int kmValue = 1000;
-    private int mValue = 100;
-    private int cmValue = 1;
+    private double inchesToCm;
+    private double cmToInches;
+    private String mile;
+    private String kilometer;
+    private int miValue;
+    private int ftValue;
+    private int inValue;
+    private int kmValue;
+    private int mValue;
+    private int cmValue;
 
     public ConversionMath()
     {
         unitValue = 0;
         unitMeasurementType = "";
         unitConvertToType = "";
+    }
+
+    static {
+        double inchesToCm = 2.54;
+        double cmToInches = 0.3937;
+        String mile = "mi";
+        String kilometer = "km";
+        int miValue = 5280;
+        int ftValue = 12;
+        int inValue = 1;
+        int kmValue = 1000;
+        int mValue = 100;
+        int cmValue = 1;
     }
 
     public ConversionMath(double inputUnitValue, String inputUnitMeasurementType, String inputUnitConvertToType)
@@ -38,7 +51,7 @@ public class ConversionMath {
         return unitValue;
     }
 
-                    /*
+        /*
         if (unitMeasurementType == "mi" && unitConvertToType == "km")
         {
 
