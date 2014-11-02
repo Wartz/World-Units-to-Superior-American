@@ -13,8 +13,11 @@ hs_err_pid*
 
 /bin/
 
-
+#Eclipse config files
 .classpath
 .project
 .settings/
-/bin
+
+#IntelliJ IDEA config files
+*.iml
+.idea/
