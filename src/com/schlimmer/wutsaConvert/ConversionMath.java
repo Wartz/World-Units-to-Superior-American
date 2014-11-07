@@ -5,8 +5,10 @@ package com.schlimmer.wutsaConvert;
  */
 public class ConversionMath {
     double unitValue;
+    double convertedValue;
     String unitMeasurementType;
     String unitConvertToType;
+    String unitTypes;
     private double inchesToCm;
     private double cmToInches;
     private String mile;
@@ -21,8 +23,10 @@ public class ConversionMath {
     public ConversionMath()
     {
         unitValue = 0;
+        convertedValue = 0;
         unitMeasurementType = "";
         unitConvertToType = "";
+        unitTypes = "";
     }
 
     static {
@@ -43,39 +47,45 @@ public class ConversionMath {
         unitValue = inputUnitValue;
         unitMeasurementType = inputUnitMeasurementType;
         unitConvertToType = inputUnitConvertToType;
+        unitTypes = unitMeasurementType+unitConvertToType;
     }
 
     private double kmToMi()
     {
-        unitValue = (unitValue * miValue * ftValue * inchesToCm / mValue / kmValue);
-        return unitValue;
+        convertedValue = (unitValue * kmValue * mValue * cmToInches / ftValue / miValue);
+        return convertedValue;
     }
 
-        /*
-        if (unitMeasurementType == "mi" && unitConvertToType == "km")
+    private double miToKm()
+    {
+        convertedValue = (unitValue * miValue * ftValue * inchesToCm / mValue / kmValue);
+        return convertedValue;
+    }
+
+    private enum UnitTypesList
         {
-
-        }
-        else if (unitMeasurementType == "km" && unitConvertToType == "mi")
-        {
-            unitValue = (unitValue * kmValue * mValue * cmToInches / ftValue / miValue);
-        }
-        */
-
-    private double filterConversionParameters() {
-
-        char unitTypes = unitMeasurementType.charAt(0) + "-" + unitConvertToType.charAt(0);
-
-        switch (unitTypes) {
-            case "km-mi":
-                unitValue=kmToMi();
+            kmmi, mikm
         }
 
-        return unitValue;
+
+    private double FilterConversionParameters()
+    {
+        UnitTypesList unitTypesList = UnitTypesList.valueOf(unitTypes);
+
+        switch (unitTypesList) {
+            case kmmi:
+                convertedValue=kmToMi();
+                break;
+            case mikm:
+                convertedValue=miToKm();
+                break;
+        }
+
+        return convertedValue;
     }
 
     public String toString()
     {
-        return unitValue + " <unitType> is equal to "  + this.filterConversionParameters() + " <convertedUnitType>"; //for now
+        return unitValue + " <unitType> is equal to "  + this.FilterConversionParameters() + " <convertedUnitType>"; //for now
     }
 }
